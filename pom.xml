@@ -2,10 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tinysquare</groupId>
-	<artifactId>tinysquare-parent</artifactId>
+	<artifactId>tinysquare</artifactId>
+	<modules>
+		<module>tinysquare-api</module>
+		<module>tinysquare-dao</module>
+		<module>tinysquare-tools</module>
+		<module>tinysquare-common</module>
+	</modules>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	<name>tinysquare-parent</name>
+	<name>tinysquare</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
