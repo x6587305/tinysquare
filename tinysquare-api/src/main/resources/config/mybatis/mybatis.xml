@@ -7,16 +7,13 @@
 		<property name="dialect" value="mysql" />
 	</properties>
 
- 	<settings>
- 		<setting name="cacheEnabled" value="true" />   
-        <setting name="useGeneratedKeys" value="true" />   
-        <setting name="defaultExecutorType" value="REUSE" />
-	</settings> 
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="useGeneratedKeys" value="true" />
+		<setting name="defaultExecutorType" value="REUSE" />
+	</settings>
 
-	<!--  
-	<plugins> 
-		<plugin interceptor="com.yhiker.gou.core.mybatis.support.plugin.PaginationInterceptor" />
-	</plugins>
-	-->
+	<!-- <plugins> <plugin interceptor="package com.tinysquare.mybatis.plugin.page.PaginationInterceptor" 
+		/> </plugins> -->
 
 </configuration>
