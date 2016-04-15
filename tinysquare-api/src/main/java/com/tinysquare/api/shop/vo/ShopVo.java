@@ -13,6 +13,8 @@ public class ShopVo implements Serializable {
 
 	private String name;
 
+	private String avator;
+
 	private String mobile;
 
 	private String tel;
@@ -37,12 +39,13 @@ public class ShopVo implements Serializable {
 
 	}
 
-	public ShopVo(Long objId, Long userId, String name, String mobile, String tel, String address, String brief, String description, Long favoriteCount,
-			Double lng, Double lat) {
+	public ShopVo(Long objId, Long userId, String name, String avator, String mobile, String tel, String address, String brief, String description,
+			Long favoriteCount, Double lng, Double lat) {
 		super();
 		this.objId = objId;
 		this.userId = userId;
 		this.name = name;
+		this.avator = avator;
 		this.mobile = mobile;
 		this.tel = tel;
 		this.address = address;
@@ -53,12 +56,13 @@ public class ShopVo implements Serializable {
 		this.lat = lat;
 	}
 
-	public ShopVo(Long objId, Long userId, String name, String mobile, String tel, String address, String brief, String description, Long favoriteCount,
-			Double distance) {
+	public ShopVo(Long objId, Long userId, String name, String avator, String mobile, String tel, String address, String brief, String description,
+			Long favoriteCount, Double distance) {
 		super();
 		this.objId = objId;
 		this.userId = userId;
 		this.name = name;
+		this.avator = avator;
 		this.mobile = mobile;
 		this.tel = tel;
 		this.address = address;
@@ -90,6 +94,14 @@ public class ShopVo implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getAvator() {
+		return avator;
+	}
+
+	public void setAvator(String avator) {
+		this.avator = avator;
 	}
 
 	public String getMobile() {

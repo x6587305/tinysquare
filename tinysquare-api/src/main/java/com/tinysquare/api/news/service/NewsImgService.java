@@ -36,6 +36,7 @@ public class NewsImgService {
 	}
 
 	public void save(Long newsId, String[] imgs, Date entrydate) {
+		this.deleteByNewsId(newsId);
 		if (!DataTools.isEmpty(imgs)) {
 			List<NewsImg> newsImgList = new ArrayList<>();
 			List<String> imgUrlList = Arrays.asList(imgs);
@@ -48,7 +49,6 @@ public class NewsImgService {
 				newsImgList.add(newsImg);
 			});
 			if (!CollectionUtils.isEmpty(newsImgList)) {
-				this.deleteByNewsId(newsId);
 				this.save(newsImgList);
 			}
 		}

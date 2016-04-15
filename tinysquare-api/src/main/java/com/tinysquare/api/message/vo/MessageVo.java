@@ -8,9 +8,17 @@ public class MessageVo implements Serializable {
 
 	private Long objId;
 
+	private Long userId;
+
 	private String title;
 
+	private String subject;
+
+	private String from;
+
 	private String content;
+	
+	private Byte isRead;
 
 	private String entrydate;
 
@@ -18,11 +26,15 @@ public class MessageVo implements Serializable {
 
 	}
 
-	public MessageVo(Long objId, String title, String content, String entrydate) {
+	public MessageVo(Long objId, Long userId, String title, String subject, String from, String content, Byte isRead, String entrydate) {
 		super();
 		this.objId = objId;
+		this.userId = userId;
 		this.title = title;
+		this.subject = subject;
+		this.from = from;
 		this.content = content;
+		this.isRead = isRead;
 		this.entrydate = entrydate;
 	}
 
@@ -34,6 +46,14 @@ public class MessageVo implements Serializable {
 		this.objId = objId;
 	}
 
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -42,12 +62,36 @@ public class MessageVo implements Serializable {
 		this.title = title;
 	}
 
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getFrom() {
+		return from;
+	}
+
+	public void setFrom(String from) {
+		this.from = from;
+	}
+
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+
+	public Byte getIsRead() {
+		return isRead;
+	}
+
+	public void setIsRead(Byte isRead) {
+		this.isRead = isRead;
 	}
 
 	public String getEntrydate() {

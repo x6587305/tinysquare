@@ -2,8 +2,6 @@ package com.tinysquare.api.user.vo;
 
 import java.io.Serializable;
 
-import com.tinysquare.api.vip_card.vo.VipCardVo;
-
 public class UserVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -21,8 +19,6 @@ public class UserVo implements Serializable {
 	private String email;
 
 	private Byte category;
-
-	private VipCardVo vipCard;
 
 	public UserVo() {
 
@@ -95,12 +91,5 @@ public class UserVo implements Serializable {
 		this.category = category;
 	}
 
-	public VipCardVo getVipCard() {
-		return vipCard;
-	}
-
-	public void setVipCard(VipCardVo vipCard) {
-		this.vipCard = vipCard;
-	}
 
 }

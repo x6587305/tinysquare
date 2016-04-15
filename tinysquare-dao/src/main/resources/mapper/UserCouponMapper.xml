@@ -315,6 +315,6 @@
 		from tiny_user_coupon a 
 		inner join tiny_coupon b on a.coupon_id = b.id and b.status = 0
 		inner join tiny_shop c on b.shop_id = c.id and c.status = 0
-		where a.status = #{status}
+		where a.status = #{status} and a.user_id = #{userId}
 	</select>
 </mapper>

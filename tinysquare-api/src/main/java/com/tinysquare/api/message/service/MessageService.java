@@ -22,6 +22,19 @@ public class MessageService {
 	@Autowired
 	private MessageMapper messageMapper;
 
+	public Message getByPrimaryKey(Long id) {
+		return this.messageMapper.selectByPrimaryKey(id);
+	}
+
+	public MessageVo getVoByPrimaryKey(Long id) {
+		Message message = this.getByPrimaryKey(id);
+		if (message == null) {
+			return null;
+		}
+		return new MessageVo(message.getId(), null, message.getTitle(), message.getSubject(), message.getAuthor(), message.getContent(), message.getIsRead(),
+				DateTools.format(message.getEntrydate()));
+	}
+
 	public List<Message> selectByUserId(Long userId, PageVo pageVo) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("userId", userId);
@@ -33,15 +46,23 @@ public class MessageService {
 	public List<MessageVo> selectVoByUserId(Long userId, PageVo pageVo) {
 		List<MessageVo> messageVoList = new ArrayList<>();
 		List<Message> messageList = this.selectByUserId(userId, pageVo);
-		messageList.forEach((message) -> messageVoList
-				.add(new MessageVo(message.getId(), message.getTitle(), message.getContent(), DateTools.format(message.getEntrydate()))));
+		messageList.forEach((message) -> messageVoList.add(new MessageVo(message.getId(), null, message.getTitle(), message.getSubject(), message.getAuthor(),
+				message.getContent(), message.getIsRead(), DateTools.format(message.getEntrydate()))));
 		return messageVoList;
 	}
 
 	public Integer countByUserId(Long userId) {
 		MessageExample example = new MessageExample();
 		example.or().andUserIdEqualTo(userId).andStatusEqualTo(Constants.Status.NORMAL);
-		return messageMapper.countByExample(example);
+		return this.messageMapper.countByExample(example);
+	}
+
+	public Integer read(Long id, Long userId) {
+		MessageExample example = new MessageExample();
+		example.or().andUserIdEqualTo(userId).andIdEqualTo(id);
+		Message messageUpdate = new Message();
+		messageUpdate.setIsRead(Constants.Message.READ);
+		return this.messageMapper.updateByExampleSelective(messageUpdate, example);
 	}
 
 }

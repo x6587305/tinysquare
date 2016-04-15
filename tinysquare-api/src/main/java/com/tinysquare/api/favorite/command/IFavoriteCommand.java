@@ -13,4 +13,13 @@ public interface IFavoriteCommand {
 	 */
 	public ResponseVo addShop(String token, Long shopId);
 
+	/**
+	 * 取消收藏店铺
+	 * 
+	 * @param token
+	 * @param shopId
+	 * @return
+	 */
+	public ResponseVo cancelShop(String token, Long shopId);
+
 }

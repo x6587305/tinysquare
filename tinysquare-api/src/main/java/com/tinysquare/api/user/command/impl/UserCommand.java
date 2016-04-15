@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.tinysquare.api.shop.service.ShopImgService;
+import com.tinysquare.api.shop.service.ShopService;
+import com.tinysquare.api.shop.vo.ShopImgVo;
+import com.tinysquare.api.shop.vo.ShopVo;
 import com.tinysquare.api.user.command.IUserCommand;
 import com.tinysquare.api.user.service.UserService;
+import com.tinysquare.api.user.vo.UserNormalVo;
+import com.tinysquare.api.user.vo.UserShopVo;
 import com.tinysquare.api.user.vo.UserTokenVo;
 import com.tinysquare.api.user.vo.UserVo;
 import com.tinysquare.api.vip_card.service.VipCardService;
@@ -37,6 +43,10 @@ public class UserCommand implements IUserCommand {
 	private UserService userService;
 	@Autowired
 	private VipCardService vipCardService;
+	@Autowired
+	private ShopService shopService;
+	@Autowired
+	private ShopImgService shopImgService;
 
 	@Override
 	public ResponseVo register(String account, String password, String email) {
@@ -98,7 +108,7 @@ public class UserCommand implements IUserCommand {
 	public ResponseVo resetPassword(String account, String email, String newPassword) {
 		User user = this.userService.getByAccount(account);
 		if (user == null) {
-			throw new BusException(Error.ERROR_USER_NOT_EXISTS);
+			throw new BusException(Error.ERROR_ACCOUNT_NOT_EXISTS);
 		}
 		if (DataTools.isEmpty(email)) {
 			return ResponseVo.error(Error.ERROR_EMAIL_EMPTY);
@@ -129,7 +139,7 @@ public class UserCommand implements IUserCommand {
 		UserVo userVo = UserLocal.get();
 		User user = this.userService.getByPrimaryKey(userVo.getObjId());
 		if (user == null) {
-			throw new BusException(Error.ERROR_USER_NOT_EXISTS);
+			throw new BusException(Error.ERROR_ACCOUNT_NOT_EXISTS);
 		}
 		if (DataTools.isEmpty(oldPassword)) {
 			return ResponseVo.error(Error.ERROR_PASSWORD_OLD_EMPTY);
@@ -159,11 +169,25 @@ public class UserCommand implements IUserCommand {
 	@Override
 	public ResponseVo mine(String token) {
 		UserVo userVo = UserLocal.get();
-		if (userVo.getCategory() == Constants.User.USER_CATEGORY_NORMAL) {
+		switch (userVo.getCategory()) {
+		case Constants.User.USER_CATEGORY_NORMAL:
+			UserNormalVo userNormalVo = new UserNormalVo(userVo.getObjId(), userVo.getAccount(), userVo.getToken(), userVo.getTel(), userVo.getMobile(),
+					userVo.getEmail(), userVo.getCategory(), null);
 			List<VipCardVo> vipCardList = this.vipCardService.selectVoByUserId(userVo.getObjId());
 			if (!CollectionUtils.isEmpty(vipCardList)) {
-				userVo.setVipCard(vipCardList.get(0));
+				userNormalVo.setVipCard(vipCardList.get(0));
 			}
+			return ResponseVo.success(userNormalVo);
+		case Constants.User.USER_CATEGORY_SHOP:
+			UserShopVo userShopVo = new UserShopVo(userVo.getObjId(), userVo.getAccount(), userVo.getToken(), userVo.getTel(), userVo.getMobile(),
+					userVo.getEmail(), userVo.getCategory(), null);
+			ShopVo shopVo = shopService.getVoByUserId(userVo.getObjId());
+			if (shopVo != null) {
+				List<ShopImgVo> shopImgVoList = shopImgService.selectVoByShopId(shopVo.getObjId());
+				shopVo.setImgs(shopImgVoList);
+				userShopVo.setShop(shopVo);
+			}
+			return ResponseVo.success(userShopVo);
 		}
 		return ResponseVo.success(userVo);
 	}
@@ -172,7 +196,7 @@ public class UserCommand implements IUserCommand {
 	public UserVo getByToken(String token) {
 		User user = this.userService.getByToken(token);
 		if (user == null) {
-			throw new BusException(Error.ERROR_USER_NOT_EXISTS);
+			throw new BusException(Error.ERROR_TOKEN);
 		}
 		UserVo userVo = new UserVo(user.getId(), user.getAccount(), user.getToken(), user.getTel(), user.getMobile(), user.getEmail(), user.getCategory());
 		return userVo;

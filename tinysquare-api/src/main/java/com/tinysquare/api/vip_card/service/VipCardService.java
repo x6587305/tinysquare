@@ -44,7 +44,7 @@ public class VipCardService {
 	public List<VipCardVo> selectVoByUserId(Long userId) {
 		List<VipCardVo> vipCardVoList = new ArrayList<>();
 		List<VipCardItem> vipCardList = this.selectByUserId(userId);
-		vipCardList.forEach((vipCard) -> vipCardVoList.add(new VipCardVo(vipCard.getId(), userId, vipCard.getShopId(), vipCard.getCardNum(), vipCard.getImg(),
+		vipCardList.forEach((vipCard) -> vipCardVoList.add(new VipCardVo(vipCard.getId(), null, vipCard.getShopId(), vipCard.getCardNum(), vipCard.getImg(),
 				vipCard.getBrief(), vipCard.getPoints(), vipCard.getUserTimes(), vipCard.getCategory(), vipCard.getIsDefault(), vipCard.getStatus(),
 				DateTools.format(vipCard.getEntrydate()), vipCard.getShopName())));
 		return vipCardVoList;

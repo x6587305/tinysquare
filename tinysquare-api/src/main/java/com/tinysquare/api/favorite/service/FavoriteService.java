@@ -24,6 +24,12 @@ public class FavoriteService {
 		return this.favoriteMapper.countByExample(example) > 0;
 	}
 
+	public Integer delete(Long userId, Long shopId) {
+		FavoriteExample example = new FavoriteExample();
+		example.or().andUserIdEqualTo(userId).andShopIdEqualTo(shopId);
+		return this.favoriteMapper.deleteByExample(example);
+	}
+
 	public Favorite save(Favorite favorite) {
 		if (favorite.getId() == null) {
 			this.favoriteMapper.insertSelective(favorite);

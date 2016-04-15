@@ -13,6 +13,19 @@ public interface IShopCommand {
 	public ResponseVo detail(Long id);
 
 	/**
+	 * 更新店铺信息
+	 * @param token
+	 * @param avator
+	 * @param name
+	 * @param tel
+	 * @param brief
+	 * @param address
+	 * @param imgs
+	 * @return
+	 */
+	public ResponseVo update(String token, String avator, String name, String tel, String brief, String address, String[] imgs);
+
+	/**
 	 * 修改店铺名称
 	 * 
 	 * @param token
@@ -43,10 +56,10 @@ public interface IShopCommand {
 	 * 修改店铺地址
 	 * 
 	 * @param token
-	 * @param tel
+	 * @param address
 	 * @return
 	 */
-	public ResponseVo updateAddress(String token, String tel);
+	public ResponseVo updateAddress(String token, String address);
 
 	/**
 	 * 修改店铺头像

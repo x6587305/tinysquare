@@ -29,4 +29,17 @@ public class FavoriteController {
 		return responseVo;
 	}
 
+	/**
+	 * 取消收藏店铺
+	 * 
+	 * @param token
+	 * @param shopId
+	 * @return
+	 */
+	@RequestMapping(value = "/cancelShop", method = RequestMethod.POST)
+	public ResponseVo cancelShop(@RequestParam(required = true) String token, @RequestParam(required = true) Long shopId) {
+		ResponseVo responseVo = this.favoriteCommand.cancelShop(token, shopId);
+		return responseVo;
+	}
+
 }

@@ -41,6 +41,53 @@ public class ShopCommand implements IShopCommand {
 	}
 
 	@Override
+	@Transactional
+	public ResponseVo update(String token, String avator, String name, String tel, String brief, String address, String[] imgs) {
+		UserVo userVo = UserLocal.get();
+		Shop shop = this.shopService.getByUserId(userVo.getObjId());
+		if (shop == null) {
+			return ResponseVo.error(Error.ERROR_SHOP_NOT_EXISTS);
+		}
+		if (!DataTools.isEmpty(avator)) {
+			avator = avator.trim();
+			if (avator.length() > 200) {
+				return ResponseVo.error(Error.ERROR_IMG_PATTERN);
+			}
+			shop.setAvator(avator);
+		}
+		if (!DataTools.isEmpty(name)) {
+			name = name.trim();
+			if (name.length() > 50) {
+				return ResponseVo.error(Error.ERROR_SHOP_NAME_LENGTH);
+			}
+			shop.setName(name);
+		}
+		if (!DataTools.isEmpty(tel)) {
+			if (!RegexTools.isMobile(tel)) {
+				return ResponseVo.error(Error.ERROR_SHOP_TEL_PATTERN);
+			}
+			shop.setTel(tel);
+		}
+		if (!DataTools.isEmpty(brief)) {
+			brief = brief.trim();
+			if (brief.length() > 200) {
+				return ResponseVo.error(Error.ERROR_SHOP_ADDRESS_LENGTH);
+			}
+			shop.setBrief(brief);
+		}
+		if (!DataTools.isEmpty(address)) {
+			address = address.trim();
+			if (address.length() > 200) {
+				return ResponseVo.error(Error.ERROR_SHOP_ADDRESS_LENGTH);
+			}
+			shop.setAddress(address);
+		}
+		this.shopService.updateByPrimaryKey(shop);
+		this.shopImgService.save(shop.getId(), imgs, DateTools.now());
+		return ResponseVo.success();
+	}
+
+	@Override
 	public ResponseVo updateName(String token, String name) {
 		UserVo userVo = UserLocal.get();
 		Shop shop = this.shopService.getByUserId(userVo.getObjId());

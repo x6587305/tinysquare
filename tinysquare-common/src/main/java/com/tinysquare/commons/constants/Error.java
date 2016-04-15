@@ -93,11 +93,6 @@ public class Error {
 	public final static String ERROR_PASSWORD_OLD = "ERROR_PASSWORD_OLD";
 
 	/**
-	 * 用户不存在
-	 */
-	public final static String ERROR_USER_NOT_EXISTS = "ERROR_USER_NOT_EXISTS";
-
-	/**
 	 * 定位失败
 	 */
 	public final static String ERROR_FAILURE_LOCATION = "ERROR_FAILURE_LOCATION";
@@ -196,6 +191,11 @@ public class Error {
 	 * 您的优惠券不存在或者已经使用过了
 	 */
 	public final static String ERROR_USER_COUPON_NOT_EXISTS = "ERROR_USER_COUPON_NOT_EXISTS";
+	
+	/**
+	 * 优惠券已经是使用过了
+	 */
+	public final static String ERROR_USER_COUPON_USED = "ERROR_USER_COUPON_USED";
 
 	/**
 	 * 优惠券已过期
