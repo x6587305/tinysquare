@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.tinysquare.commons.constants.Constants;
+import com.tinysquare.commons.vo.ShareVo;
 
 public class NewsVo implements Serializable {
 
@@ -28,6 +29,8 @@ public class NewsVo implements Serializable {
 	public Byte status;
 
 	private Byte canFavorite = Constants.Boolean.FALSE;
+
+	private ShareVo share;
 
 	private List<NewsImgVo> imgs;
 
@@ -140,12 +143,28 @@ public class NewsVo implements Serializable {
 		this.canFavorite = canFavorite;
 	}
 
+	public ShareVo getShare() {
+		return share;
+	}
+
+	public void setShare(ShareVo share) {
+		this.share = share;
+	}
+
 	public List<NewsImgVo> getImgs() {
 		return imgs;
 	}
 
 	public void setImgs(List<NewsImgVo> imgs) {
 		this.imgs = imgs;
+	}
+
+	public void setNewShare() {
+		String brief = this.content;
+		if (brief != null && brief.length() > 30) {
+			brief = brief.substring(0, 30) + "...";
+		}
+		this.setShare(new ShareVo(this.avator, this.shopName, brief, Constants.News.SHARE_URL + "?objId=" + this.objId));
 	}
 
 }

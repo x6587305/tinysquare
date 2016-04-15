@@ -44,17 +44,20 @@ public class UserCouponCommand implements IUserCouponCommand {
 	}
 
 	@Override
-	public ResponseVo use(String token, Long userCouponId) {
+	public ResponseVo use(String token, Long id) {
 		UserVo userVo = UserLocal.get();
-		UserCoupon userCoupon = this.userCouponService.getByPrimaryKey(userCouponId);
-		if (userCoupon == null || userVo.getObjId() == userCoupon.getUserId()) {
+		UserCoupon userCoupon = this.userCouponService.getByPrimaryKey(id);
+		if (userCoupon == null || userVo.getObjId() != userCoupon.getUserId()) {
+			return ResponseVo.error(Error.ERROR_USER_COUPON_NOT_EXISTS);
+		}
+		if (userCoupon.getStatus() == Constants.Coupon.USED) {
 			return ResponseVo.error(Error.ERROR_USER_COUPON_NOT_EXISTS);
 		}
 		Coupon coupon = this.couponService.getByPrimaryKey(userCoupon.getCouponId());
 		if (coupon == null || Constants.Status.NORMAL != coupon.getStatus() || (coupon.getEndTime() != null && DateTools.now().after(coupon.getEndTime()))) {
 			return ResponseVo.error(Error.ERROR_COUPON_INVALID);
 		}
-		this.userCouponService.used(userCouponId);
+		this.userCouponService.used(id);
 		return ResponseVo.success();
 	}
 
@@ -77,7 +80,7 @@ public class UserCouponCommand implements IUserCouponCommand {
 			UserCoupon userCoupon = new UserCoupon();
 			userCoupon.setCouponId(couponCode.getCouponId());
 			userCoupon.setUserId(userVo.getObjId());
-			userCoupon.setStatus(Constants.Coupon.UNUSER);
+			userCoupon.setStatus(Constants.Coupon.UNUSE);
 			this.userCouponService.save(userCoupon);
 		}
 		this.couponCodeService.redeem(couponCode);

@@ -29,6 +29,26 @@ public class ShopController {
 	}
 
 	/**
+	 * 更新
+	 * 
+	 * @param token
+	 * @param avator
+	 * @param name
+	 * @param tel
+	 * @param brief
+	 * @param address
+	 * @param imgs
+	 * @return
+	 */
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ResponseVo update(@RequestParam(required = true) String token, @RequestParam(required = false) String avator,
+			@RequestParam(required = false) String name, @RequestParam(required = false) String tel, @RequestParam(required = true) String brief,
+			@RequestParam(required = true) String address, @RequestParam(required = false) String[] imgs) {
+		ResponseVo responseVo = this.shopCommand.update(token, avator, name, tel, brief, address, imgs);
+		return responseVo;
+	}
+
+	/**
 	 * 修改店铺名称
 	 * 
 	 * @param token

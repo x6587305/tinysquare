@@ -41,8 +41,8 @@ public class UseCouponController {
 	 * @return
 	 */
 	@RequestMapping(value = "/use", method = RequestMethod.POST)
-	public ResponseVo user(@RequestParam(required = true) String token, @RequestParam(required = true) Long userCouponId) {
-		ResponseVo reponseVo = userCouponCommand.use(token, userCouponId);
+	public ResponseVo user(@RequestParam(required = true) String token, @RequestParam(required = true) Long id) {
+		ResponseVo reponseVo = userCouponCommand.use(token, id);
 		return reponseVo;
 	}
 

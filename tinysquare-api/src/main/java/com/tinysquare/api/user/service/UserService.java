@@ -123,7 +123,7 @@ public class UserService {
 	 */
 	public User getByToken(String token) {
 		if (DataTools.isEmpty(token)) {
-			throw new BusException(Error.ERROR_USER_NOT_EXISTS);
+			throw new BusException(Error.ERROR_TOKEN);
 		}
 		UserExample example = new UserExample();
 		example.or().andTokenEqualTo(token);

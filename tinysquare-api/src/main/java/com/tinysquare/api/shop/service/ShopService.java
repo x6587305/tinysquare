@@ -27,8 +27,8 @@ public class ShopService {
 		if (shop == null || shop.getStatus() != Constants.Status.NORMAL) {
 			return null;
 		}
-		return new ShopVo(id, shop.getUserId(), shop.getName(), shop.getMobile(), shop.getTel(), shop.getAddress(), shop.getBrief(), shop.getDescription(),
-				shop.getFavoriteCount(), shop.getLongitude() == null ? 0d : shop.getLongitude().doubleValue(),
+		return new ShopVo(id, null, shop.getName(), shop.getAvator(), shop.getMobile(), shop.getTel(), shop.getAddress(), shop.getBrief(),
+				shop.getDescription(), shop.getFavoriteCount(), shop.getLongitude() == null ? 0d : shop.getLongitude().doubleValue(),
 				shop.getLatitude() == null ? 0d : shop.getLatitude().doubleValue());
 	}
 
@@ -39,7 +39,39 @@ public class ShopService {
 		return CollectionUtils.isEmpty(shopList) ? null : shopList.get(0);
 	}
 
+	public ShopVo getVoByUserId(Long userId) {
+		Shop shop = this.getByUserId(userId);
+		if (shop == null || shop.getStatus() != Constants.Status.NORMAL) {
+			return null;
+		}
+		return new ShopVo(shop.getId(), null, shop.getName(), shop.getAvator(), shop.getMobile(), shop.getTel(), shop.getAddress(), shop.getBrief(),
+				shop.getDescription(), shop.getFavoriteCount(), shop.getLongitude() == null ? 0d : shop.getLongitude().doubleValue(),
+				shop.getLatitude() == null ? 0d : shop.getLatitude().doubleValue());
+	}
+
 	public Integer updateByPrimaryKey(Shop shop) {
 		return this.shopMapper.updateByPrimaryKeySelective(shop);
 	}
+
+	public Integer incrementFavoriteCount(Shop shop) {
+		Long favoriteCount = shop.getFavoriteCount();
+		favoriteCount = favoriteCount == null ? 1 : favoriteCount + 1;
+		Shop updateShop = new Shop();
+		updateShop.setId(shop.getId());
+		updateShop.setFavoriteCount(favoriteCount);
+		return this.updateByPrimaryKey(updateShop);
+	}
+
+	public Integer decrementFavoriteCount(Shop shop) {
+		Long favoriteCount = shop.getFavoriteCount();
+		favoriteCount = favoriteCount == null ? 0 : favoriteCount - 1;
+		if (favoriteCount < 0) {
+			favoriteCount = 0l;
+		}
+		Shop updateShop = new Shop();
+		updateShop.setId(shop.getId());
+		updateShop.setFavoriteCount(favoriteCount);
+		return this.updateByPrimaryKey(updateShop);
+	}
+
 }

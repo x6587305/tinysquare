@@ -45,6 +45,7 @@ public class ShopImgService {
 	}
 
 	public void save(Long shopId, String[] imgs, Date entrydate) {
+		this.deleteByShopId(shopId);
 		if (!DataTools.isEmpty(imgs)) {
 			List<ShopImg> shopImgList = new ArrayList<>();
 			List<String> imgUrlList = Arrays.asList(imgs);
@@ -57,7 +58,6 @@ public class ShopImgService {
 				shopImgList.add(shopImg);
 			});
 			if (!CollectionUtils.isEmpty(shopImgList)) {
-				this.deleteByShopId(shopId);
 				this.save(shopImgList);
 			}
 		}
