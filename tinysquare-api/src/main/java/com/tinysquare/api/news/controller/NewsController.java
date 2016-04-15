@@ -1,5 +1,6 @@
 package com.tinysquare.api.news.controller;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,8 @@ import com.tinysquare.commons.vo.ResponseVo;
 @RestController
 @RequestMapping("/news")
 public class NewsController {
+
+	private static Logger LOGGER = Logger.getLogger(NewsController.class);
 
 	@Autowired
 	private INewsCommand newsCommand;
@@ -30,6 +33,7 @@ public class NewsController {
 	@RequestMapping(value = "/listByNear", method = RequestMethod.POST)
 	public ResponseVo listByNear(@RequestParam(required = false) String token, @RequestParam(required = true) Double lng,
 			@RequestParam(required = true) Double lat, @RequestParam(required = true) Integer pageNum, @RequestParam(required = true) Integer pageSize) {
+		LOGGER.info("lng:" + lng + ",lat:" + lat);
 		ResponseVo responseVo = this.newsCommand.listByNear(token, lng, lat, new PageVo(pageNum, pageSize));
 		return responseVo;
 	}

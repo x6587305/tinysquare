@@ -38,10 +38,10 @@ public class UserCouponService {
 	public List<UserCouponVo> selectVoByUserIdAndStatus(Long userId, Byte status, PageVo pageVo) {
 		List<UserCouponVo> userCouponVoList = new ArrayList<>();
 		List<UserCouponItem> userCouponItemList = selectByUserIdAndStatus(userId, status, pageVo);
-		userCouponItemList.forEach((userCouponItem) -> userCouponVoList.add(new UserCouponVo(userCouponItem.getId(), userCouponItem.getUserId(),
-				userCouponItem.getCouponId(), userCouponItem.getStatus(), DateTools.format(userCouponItem.getEntrydate()), userCouponItem.getShopId(),
-				userCouponItem.getShopName(), userCouponItem.getCouponName(), userCouponItem.getCouponImg(), userCouponItem.getCategory(),
-				userCouponItem.getAmount(), DateTools.format(userCouponItem.getStartTime()), DateTools.format(userCouponItem.getEndTime()))));
+		userCouponItemList.forEach((userCouponItem) -> userCouponVoList.add(new UserCouponVo(userCouponItem.getId(), null, userCouponItem.getCouponId(),
+				userCouponItem.getStatus(), DateTools.format(userCouponItem.getEntrydate()), userCouponItem.getShopId(), userCouponItem.getShopName(),
+				userCouponItem.getCouponName(), userCouponItem.getCouponImg(), userCouponItem.getCategory(), userCouponItem.getAmount(),
+				DateTools.format(userCouponItem.getStartTime()), DateTools.format(userCouponItem.getEndTime()))));
 		return userCouponVoList;
 	}
 
@@ -55,7 +55,7 @@ public class UserCouponService {
 	public Integer used(Long id) {
 		UserCoupon userCoupon = new UserCoupon();
 		userCoupon.setId(id);
-		userCoupon.setStatus(Constants.Coupon.UNUSER);
+		userCoupon.setStatus(Constants.Coupon.USED);
 		return this.userCouponMapper.updateByPrimaryKeySelective(userCoupon);
 	}
 

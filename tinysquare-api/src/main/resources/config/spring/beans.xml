@@ -28,8 +28,9 @@
 		<property name="testOnBorrow" value="${testOnBorrow}"/>
 		<property name="testOnReturn" value="${testOnReturn}"/>
 		<property name="testWhileIdle" value="${testWhileIdle}"/>
-		<!-- 
+		<property name="numTestsPerEvictionRun" value="${numTestsPerEvictionRun}"/>
 		<property name="validationQuery" value="${validationQuery}"/>
+		<!-- 
 		<property name="validationInterval" value="${validationInterval}"/>
 		 -->
 		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/>

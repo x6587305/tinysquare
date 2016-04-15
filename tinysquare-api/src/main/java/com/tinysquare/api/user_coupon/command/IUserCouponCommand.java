@@ -19,10 +19,10 @@ public interface IUserCouponCommand {
 	 * 使用优惠券
 	 * 
 	 * @param token
-	 * @param userCouponId
+	 * @param id
 	 * @return
 	 */
-	public ResponseVo use(String token, Long userCouponId);
+	public ResponseVo use(String token, Long id);
 
 	/**
 	 * 兑换优惠券
