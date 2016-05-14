@@ -44,7 +44,10 @@ public class NewsCommand implements INewsCommand {
 			return ResponseVo.error(Error.ERROR_FAILURE_LOCATION);
 		}
 		List<NewsVo> newsVoList = this.newsService.selectVoOrderByDistance(lng, lat, pageVo);
-		newsVoList.forEach((newsVo) -> newsVo.setImgs(this.newsImgService.selectVoByNewsId(newsVo.getObjId())));
+		newsVoList.forEach((newsVo) -> {
+			newsVo.setImgs(this.newsImgService.selectVoByNewsId(newsVo.getObjId()));
+			newsVo.setNewShare();
+		});
 		// 判断用户是否已经收藏
 		UserVo userVo = UserLocal.get();
 		if (!DataTools.isEmpty(token) && userVo != null) {
@@ -67,7 +70,10 @@ public class NewsCommand implements INewsCommand {
 		}
 		UserVo userVo = UserLocal.get();
 		List<NewsVo> newsVoList = this.newsService.selectVoByFavorite(userVo.getObjId(), lng, lat, pageVo);
-		newsVoList.forEach((newsVo) -> newsVo.setImgs(this.newsImgService.selectVoByNewsId(newsVo.getObjId())));
+		newsVoList.forEach((newsVo) -> {
+			newsVo.setImgs(this.newsImgService.selectVoByNewsId(newsVo.getObjId()));
+			newsVo.setNewShare();
+		});
 		Integer totalCount = this.newsService.countByFavorite(userVo.getObjId());
 		pageVo.setTotalCount(totalCount);
 		pageVo.setResult(newsVoList);
@@ -77,7 +83,10 @@ public class NewsCommand implements INewsCommand {
 	@Override
 	public ResponseVo listByShop(Long shopId, PageVo pageVo) {
 		List<NewsVo> newsVoList = newsService.selectVoByShopId(shopId, pageVo);
-		newsVoList.forEach((newsVo) -> newsVo.setImgs(this.newsImgService.selectVoByNewsId(newsVo.getObjId())));
+		newsVoList.forEach((newsVo) -> {
+			newsVo.setImgs(this.newsImgService.selectVoByNewsId(newsVo.getObjId()));
+			newsVo.setNewShare();
+		});
 		Integer totalCount = this.newsService.countByShopId(shopId);
 		pageVo.setTotalCount(totalCount);
 		pageVo.setResult(newsVoList);

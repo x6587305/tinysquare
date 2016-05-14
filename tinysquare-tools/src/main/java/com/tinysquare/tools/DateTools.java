@@ -7,7 +7,7 @@ public class DateTools {
 
 	public interface Format {
 
-		public final static SimpleDateFormat STANDARD_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
+		public final static SimpleDateFormat STANDARD_FORMAT = new SimpleDateFormat("MM-yy HH:mm");
 
 		public final static SimpleDateFormat MILLISECOND_FORMAT = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 	}
@@ -68,6 +68,7 @@ public class DateTools {
 
 	public static void main(String[] args) {
 		System.out.println(format(now(), Format.MILLISECOND_FORMAT));
+		System.out.println(format(now()));
 	}
 
 }

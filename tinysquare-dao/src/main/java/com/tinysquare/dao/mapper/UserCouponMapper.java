@@ -1,14 +1,13 @@
 package com.tinysquare.dao.mapper;
 
-import com.tinysquare.dao.entity.Message;
-import com.tinysquare.dao.entity.UserCoupon;
-import com.tinysquare.dao.entity.UserCouponExample;
-import com.tinysquare.dao.entityex.UserCouponItem;
-
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+
+import com.tinysquare.dao.entity.UserCoupon;
+import com.tinysquare.dao.entity.UserCouponExample;
+import com.tinysquare.dao.entityex.UserCouponItem;
 
 public interface UserCouponMapper {
 	/**

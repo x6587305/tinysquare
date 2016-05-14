@@ -79,7 +79,17 @@ public class Constants {
 	public interface Message {
 
 		public final static byte UNREAD = 0;
+<<<<<<< HEAD
 
 		public final static byte READ = 1;
+=======
+
+		public final static byte READ = 1;
+	}
+
+	public interface News {
+		
+		public final static String SHARE_URL = "";
+>>>>>>> wade009/master
 	}
 }
