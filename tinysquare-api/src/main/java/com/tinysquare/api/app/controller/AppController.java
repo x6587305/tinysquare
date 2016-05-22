@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tinysquare.api.app.vo.UpdateVo;
 import com.tinysquare.commons.constants.Constants;
 import com.tinysquare.commons.vo.ResponseVo;
+<<<<<<< HEAD
+=======
+import com.tinysquare.commons.vo.ShareVo;
+>>>>>>> wade009/master
 
 @RestController
 @RequestMapping("/app")
@@ -27,4 +31,18 @@ public class AppController {
 		return ResponseVo.success(udateVo);
 	}
 
+<<<<<<< HEAD
+=======
+	/**
+	 * 分享
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/share", method = RequestMethod.POST)
+	public ResponseVo share() {
+		ShareVo shareVo = new ShareVo("http://7xtczz.com1.z0.glb.clouddn.com/tinysquareicon108.png", "TinySquare", "TinySquare app", "http://tiny-square.com/");
+		return ResponseVo.success(shareVo);
+	}
+
+>>>>>>> wade009/master
 }

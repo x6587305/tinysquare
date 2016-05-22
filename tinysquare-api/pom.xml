@@ -7,7 +7,7 @@
 		<version>1.0</version>
 	</parent>
 	<artifactId>tinysquare-api</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>tinysquare-api Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>

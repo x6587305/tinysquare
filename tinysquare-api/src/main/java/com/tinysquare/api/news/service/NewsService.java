@@ -41,12 +41,8 @@ public class NewsService {
 	public List<NewsVo> selectVoOrderByDistance(Double lng, Double lat, PageVo pageVo) {
 		List<NewsVo> newsVoList = new ArrayList<>();
 		List<NewsItem> newsItemList = this.selectOrderByDistance(lng, lat, pageVo);
-		newsItemList
-				.forEach(
-						(newsItem) -> newsVoList.add(new NewsVo(newsItem.getId(), newsItem.getShopName(),
-								newsItem.getContent(), newsItem.getShopId(), DateTools.format(newsItem.getEntrydate()), newsItem.getAvator(), newsItem
-										.getFavoriteCount(),
-				DataTools.format2Double(DataTools.divide(newsItem.getDistance() == null ? 0d : newsItem.getDistance().doubleValue(), 1000d)) + "km")));
+		newsItemList.forEach((newsItem) -> newsVoList.add(new NewsVo(newsItem.getId(), newsItem.getShopName(), newsItem.getContent(), newsItem.getShopId(),
+				DateTools.format(newsItem.getEntrydate()), newsItem.getAvator(), newsItem.getFavoriteCount(), DataTools.getDistance(newsItem.getDistance()))));
 		return newsVoList;
 	}
 
@@ -68,7 +64,7 @@ public class NewsService {
 		List<NewsVo> newsVoList = new ArrayList<>();
 		List<NewsItem> newsItemList = this.selectByFavorite(userId, lng, lat, pageVo);
 		newsItemList.forEach((newsItem) -> newsVoList.add(new NewsVo(newsItem.getId(), newsItem.getShopName(), newsItem.getContent(), newsItem.getShopId(),
-				DateTools.format(newsItem.getEntrydate()), newsItem.getAvator(), newsItem.getFavoriteCount(), null)));
+				DateTools.format(newsItem.getEntrydate()), newsItem.getAvator(), newsItem.getFavoriteCount(), DataTools.getDistance(newsItem.getDistance()))));
 		return newsVoList;
 	}
 

@@ -80,9 +80,12 @@ public class Constants {
 
 		public final static byte UNREAD = 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		public final static byte READ = 1;
 =======
+=======
+>>>>>>> wade009/master
 
 		public final static byte READ = 1;
 	}
@@ -90,6 +93,9 @@ public class Constants {
 	public interface News {
 		
 		public final static String SHARE_URL = "";
+<<<<<<< HEAD
+>>>>>>> wade009/master
+=======
 >>>>>>> wade009/master
 	}
 }
