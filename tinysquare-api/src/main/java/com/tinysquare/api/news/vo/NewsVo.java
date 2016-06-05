@@ -8,7 +8,6 @@ import com.tinysquare.commons.vo.ShareVo;
 
 import com.tinysquare.tools.DataTools;
 
-
 public class NewsVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -169,7 +168,6 @@ public class NewsVo implements Serializable {
 		}
 
 		this.setShare(new ShareVo(this.avator, this.shopName, brief, Constants.News.SHARE_URL + this.objId));
-
 	}
 
 }

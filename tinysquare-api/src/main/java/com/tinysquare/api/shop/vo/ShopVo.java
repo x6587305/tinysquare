@@ -48,7 +48,6 @@ public class ShopVo implements Serializable {
 		this.objId = objId;
 		this.userId = userId;
 		this.name = name;
-
 		this.avator = DataTools.setImg(Constants.App.IMG_URL, avator);
 		this.mobile = mobile;
 		this.tel = tel;
@@ -66,9 +65,7 @@ public class ShopVo implements Serializable {
 		this.objId = objId;
 		this.userId = userId;
 		this.name = name;
-
 		this.avator = DataTools.setImg(Constants.App.IMG_URL, avator);
-
 		this.mobile = mobile;
 		this.tel = tel;
 		this.address = address;

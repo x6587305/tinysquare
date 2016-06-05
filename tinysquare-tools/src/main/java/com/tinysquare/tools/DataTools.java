@@ -195,7 +195,6 @@ public class DataTools {
 		return format2Double(value, ROUND_FLOAT_FORMAT) + "km";
 	}
 
-
 	/**
 	 * 设置图片
 	 * 
@@ -209,6 +208,5 @@ public class DataTools {
 		}
 		return url;
 	}
-
 
 }

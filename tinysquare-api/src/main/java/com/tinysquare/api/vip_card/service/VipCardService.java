@@ -47,9 +47,7 @@ public class VipCardService {
 		List<VipCardItem> vipCardList = this.selectByUserId(userId);
 		vipCardList.forEach((vipCard) -> vipCardVoList.add(new VipCardVo(vipCard.getId(), null, vipCard.getShopId(), vipCard.getCardNum(), vipCard.getImg(),
 				vipCard.getBrief(), vipCard.getPoints(), vipCard.getUserTimes(), vipCard.getCategory(), vipCard.getIsDefault(), vipCard.getStatus(),
-
 				DateTools.format(vipCard.getEntrydate()), !DataTools.isEmpty(vipCard.getImg()) ? null : vipCard.getShopName())));
-
 		return vipCardVoList;
 	}
 
