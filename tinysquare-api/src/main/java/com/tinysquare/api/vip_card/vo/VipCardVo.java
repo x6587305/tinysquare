@@ -2,6 +2,9 @@ package com.tinysquare.api.vip_card.vo;
 
 import java.io.Serializable;
 
+import com.tinysquare.commons.constants.Constants;
+import com.tinysquare.tools.DataTools;
+
 public class VipCardVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -43,7 +46,7 @@ public class VipCardVo implements Serializable {
 		this.userId = userId;
 		this.shopId = shopId;
 		this.cardNum = cardNum;
-		this.img = img;
+		this.img = DataTools.setImg(Constants.App.IMG_URL, img);
 		this.brief = brief;
 		this.points = points;
 		this.userTimes = userTimes;
@@ -91,7 +94,7 @@ public class VipCardVo implements Serializable {
 	}
 
 	public void setImg(String img) {
-		this.img = img;
+		this.img = DataTools.setImg(Constants.App.IMG_URL, img);
 	}
 
 	public String getBrief() {

@@ -3,6 +3,9 @@ package com.tinysquare.api.shop.vo;
 import java.io.Serializable;
 import java.util.List;
 
+import com.tinysquare.commons.constants.Constants;
+import com.tinysquare.tools.DataTools;
+
 public class ShopVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -45,7 +48,8 @@ public class ShopVo implements Serializable {
 		this.objId = objId;
 		this.userId = userId;
 		this.name = name;
-		this.avator = avator;
+
+		this.avator = DataTools.setImg(Constants.App.IMG_URL, avator);
 		this.mobile = mobile;
 		this.tel = tel;
 		this.address = address;
@@ -62,7 +66,9 @@ public class ShopVo implements Serializable {
 		this.objId = objId;
 		this.userId = userId;
 		this.name = name;
-		this.avator = avator;
+
+		this.avator = DataTools.setImg(Constants.App.IMG_URL, avator);
+
 		this.mobile = mobile;
 		this.tel = tel;
 		this.address = address;

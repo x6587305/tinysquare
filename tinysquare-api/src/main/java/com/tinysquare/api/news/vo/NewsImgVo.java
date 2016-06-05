@@ -2,6 +2,9 @@ package com.tinysquare.api.news.vo;
 
 import java.io.Serializable;
 
+import com.tinysquare.commons.constants.Constants;
+import com.tinysquare.tools.DataTools;
+
 public class NewsImgVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -9,15 +12,15 @@ public class NewsImgVo implements Serializable {
 	private Long objId;
 
 	private String url;
-	
-	public NewsImgVo(){
-		
+
+	public NewsImgVo() {
+
 	}
 
 	public NewsImgVo(Long objId, String url) {
 		super();
 		this.objId = objId;
-		this.url = url;
+		this.url = DataTools.setImg(Constants.App.IMG_URL, url);
 	}
 
 	public Long getObjId() {
@@ -33,7 +36,7 @@ public class NewsImgVo implements Serializable {
 	}
 
 	public void setUrl(String url) {
-		this.url = url;
+		this.url = DataTools.setImg(Constants.App.IMG_URL, url);
 	}
 
 }

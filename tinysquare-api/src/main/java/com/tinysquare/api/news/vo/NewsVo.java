@@ -6,6 +6,9 @@ import java.util.List;
 import com.tinysquare.commons.constants.Constants;
 import com.tinysquare.commons.vo.ShareVo;
 
+import com.tinysquare.tools.DataTools;
+
+
 public class NewsVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -45,7 +48,7 @@ public class NewsVo implements Serializable {
 		this.content = content;
 		this.shopId = shopId;
 		this.entrydate = entrydate;
-		this.avator = avator;
+		this.avator = DataTools.setImg(Constants.App.IMG_URL, avator);
 		this.favoriteCount = favoriteCount;
 		this.distance = distance;
 	}
@@ -57,7 +60,7 @@ public class NewsVo implements Serializable {
 		this.content = content;
 		this.shopId = shopId;
 		this.entrydate = entrydate;
-		this.avator = avator;
+		this.avator = DataTools.setImg(Constants.App.IMG_URL, avator);
 		this.favoriteCount = favoriteCount;
 		this.distance = distance;
 		this.status = status;
@@ -164,7 +167,9 @@ public class NewsVo implements Serializable {
 		if (brief != null && brief.length() > 30) {
 			brief = brief.substring(0, 30) + "...";
 		}
-		this.setShare(new ShareVo(this.avator, this.shopName, brief, Constants.News.SHARE_URL + "?objId=" + this.objId));
+
+		this.setShare(new ShareVo(this.avator, this.shopName, brief, Constants.News.SHARE_URL + this.objId));
+
 	}
 
 }

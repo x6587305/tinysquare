@@ -1,5 +1,8 @@
 package com.tinysquare.interceptor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,6 +26,15 @@ import com.tinysquare.tools.LoggerTools;
 
 public class RequestInterceptor implements HandlerInterceptor {
 
+	private final static List<String> SECURITY_URL_LIST = new ArrayList<String>() {
+
+		private static final long serialVersionUID = 1L;
+
+		{
+			add("newsFront/detail");
+		}
+	};
+
 	private static Logger logger = Logger.getLogger(RequestInterceptor.class);
 
 	@Autowired
@@ -35,23 +47,11 @@ public class RequestInterceptor implements HandlerInterceptor {
 		String token = request.getParameter(Constants.Params.TOKEN);
 		String version = request.getParameter(Constants.Params.VERSION);
 		String sign = request.getParameter(Constants.Params.SIGN);
-		Byte platformValue = Platform.getValue(platform);
-		if (platformValue == null) {
-			throw new BusException(Error.ERROR_PLATFORM);
+		String url = request.getRequestURI();
+		if (!this.isSecurityUrl(url)) {
+			this.apiValid(platform, sign, token, version, request);
 		}
-		// 验证签名
-		if (DataTools.isEmpty(sign) || !Sign.validate(request)) {
-			throw new BusException(Error.ERROR_SIGN);
-		}
-		// 验证token
-		if (!DataTools.isEmpty(token)) {
-			UserVo userVo = this.userCommand.getByToken(token);
-			UserLocal.set(userVo);
-		}
-		RequestVo requestVo = new RequestVo(Platform.getValue(platform), token, version, sign);
-		RequestLocal.set(requestVo);
-		String message = request.getRequestURI() + " " + requestVo;
-		LoggerTools.debug(logger, message);
+		this.bulidRequest(platform, sign, token, version, url);
 		return true;
 	}
 
@@ -68,6 +68,39 @@ public class RequestInterceptor implements HandlerInterceptor {
 	private void clear() {
 		UserLocal.remove();
 		RequestLocal.remove();
+	}
+
+	private boolean isSecurityUrl(String url) {
+		for (String securityUrl : SECURITY_URL_LIST) {
+			int index = url.indexOf(securityUrl);
+			if (index == -1) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private void apiValid(String platform, String sign, String token, String version, HttpServletRequest request) {
+		Byte platformValue = Platform.getValue(platform);
+		if (platformValue == null) {
+			throw new BusException(Error.ERROR_PLATFORM);
+		}
+		// 验证签名
+		if (DataTools.isEmpty(sign) || !Sign.validate(request)) {
+			throw new BusException(Error.ERROR_SIGN);
+		}
+		// 验证token
+		if (!DataTools.isEmpty(token)) {
+			UserVo userVo = this.userCommand.getByToken(token);
+			UserLocal.set(userVo);
+		}
+	}
+
+	private void bulidRequest(String platform, String sign, String token, String version, String url) {
+		RequestVo requestVo = new RequestVo(Platform.getValue(platform), token, version, sign);
+		RequestLocal.set(requestVo);
+		String message = url + " " + requestVo;
+		LoggerTools.debug(logger, message);
 	}
 
 }

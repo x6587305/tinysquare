@@ -13,6 +13,11 @@ public class Constants {
 		public final static int APP_STATUS_UPDATE = 1;
 
 		public final static int APP_STATUS_MUST_UPDATE = 2;
+
+		
+		public final static String IMG_URL = "http://source.tiny-square.com/";
+		
+
 	}
 
 	public interface User {
@@ -80,13 +85,20 @@ public class Constants {
 
 		public final static byte UNREAD = 0;
 
-
 		public final static byte READ = 1;
 	}
 
 	public interface News {
 		
 		public final static String SHARE_URL = "";
+
+
+		public final static byte READ = 1;
+	}
+
+	public interface News {
+		
+		public final static String SHARE_URL = "http://www.tinysquareapi.com/tinysquare-api/newsFront/detail/";
 
 	}
 }

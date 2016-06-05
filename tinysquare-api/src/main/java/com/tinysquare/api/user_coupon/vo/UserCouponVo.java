@@ -3,6 +3,9 @@ package com.tinysquare.api.user_coupon.vo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.tinysquare.commons.constants.Constants;
+import com.tinysquare.tools.DataTools;
+
 public class UserCouponVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,8 +36,8 @@ public class UserCouponVo implements Serializable {
 
 	private String endTime;
 
-	public UserCouponVo(Long objId, Long userId, Long couponId, Byte status, String entrydate, Long shopId, String shopName, String couponName, String couponImg,
-			Byte category, BigDecimal amount, String startTime, String endTime) {
+	public UserCouponVo(Long objId, Long userId, Long couponId, Byte status, String entrydate, Long shopId, String shopName, String couponName,
+			String couponImg, Byte category, BigDecimal amount, String startTime, String endTime) {
 		super();
 		this.objId = objId;
 		this.userId = userId;
@@ -44,7 +47,7 @@ public class UserCouponVo implements Serializable {
 		this.shopId = shopId;
 		this.shopName = shopName;
 		this.couponName = couponName;
-		this.couponImg = couponImg;
+		this.couponImg = DataTools.setImg(Constants.App.IMG_URL, couponImg);
 		this.category = category;
 		this.amount = amount;
 		this.startTime = startTime;
@@ -120,7 +123,7 @@ public class UserCouponVo implements Serializable {
 	}
 
 	public void setCouponImg(String couponImg) {
-		this.couponImg = couponImg;
+		this.couponImg = DataTools.setImg(Constants.App.IMG_URL, couponImg);
 	}
 
 	public Byte getCategory() {

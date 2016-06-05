@@ -29,6 +29,14 @@ public class NewsService {
 		return this.newsMapper.selectByPrimaryKey(id);
 	}
 
+	public NewsVo getVoByPrimaryKey(Long id) {
+		News news = this.getByPrimaryKey(id);
+		if (news == null) {
+			return null;
+		}
+		return new NewsVo(news.getId(), null, news.getContent(), news.getShopId(), DateTools.format(news.getEntrydate()), null, null, null);
+	}
+
 	public List<NewsItem> selectOrderByDistance(Double lng, Double lat, PageVo pageVo) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("lng", lng);

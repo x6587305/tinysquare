@@ -195,4 +195,20 @@ public class DataTools {
 		return format2Double(value, ROUND_FLOAT_FORMAT) + "km";
 	}
 
+
+	/**
+	 * 设置图片
+	 * 
+	 * @param prefix
+	 * @param url
+	 * @return
+	 */
+	public static String setImg(String prefix, String url) {
+		if (!DataTools.isEmpty(url) && url.indexOf("http:") == -1) {
+			return prefix + url;
+		}
+		return url;
+	}
+
+
 }

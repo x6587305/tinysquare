@@ -2,6 +2,9 @@ package com.tinysquare.api.shop.vo;
 
 import java.io.Serializable;
 
+import com.tinysquare.commons.constants.Constants;
+import com.tinysquare.tools.DataTools;
+
 public class ShopImgVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,7 +20,7 @@ public class ShopImgVo implements Serializable {
 	public ShopImgVo(Long objId, String url) {
 		super();
 		this.objId = objId;
-		this.url = url;
+		this.url = DataTools.setImg(Constants.App.IMG_URL, url);
 	}
 
 	public Long getObjId() {
@@ -33,7 +36,7 @@ public class ShopImgVo implements Serializable {
 	}
 
 	public void setUrl(String url) {
-		this.url = url;
+		this.url = DataTools.setImg(Constants.App.IMG_URL, url);
 	}
 
 }
