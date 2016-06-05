@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tinysquare.api.app.vo.UpdateVo;
 import com.tinysquare.commons.constants.Constants;
 import com.tinysquare.commons.vo.ResponseVo;
-<<<<<<< HEAD
-=======
 import com.tinysquare.commons.vo.ShareVo;
->>>>>>> wade009/master
+
 
 @RestController
 @RequestMapping("/app")
@@ -31,8 +29,7 @@ public class AppController {
 		return ResponseVo.success(udateVo);
 	}
 
-<<<<<<< HEAD
-=======
+
 	/**
 	 * 分享
 	 * 
@@ -44,5 +41,5 @@ public class AppController {
 		return ResponseVo.success(shareVo);
 	}
 
->>>>>>> wade009/master
+
 }
